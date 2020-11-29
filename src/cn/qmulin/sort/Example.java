@@ -6,7 +6,7 @@ package cn.qmulin.sort;
  * @author: muLin
  * @time: 2020/10/29 17:08
  */
-@SuppressWarnings("unchecked")
+
 public class Example {
     public static boolean less(Comparable v,Comparable w){
         return v.compareTo(w)<0;
@@ -17,8 +17,8 @@ public class Example {
         a[j]=t;
     }
     public static void show(Comparable[] a){
-        for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i]+" ");
+        for (Comparable comparable : a) {
+            System.out.print(comparable + " ");
         }
         System.out.println();
     }
