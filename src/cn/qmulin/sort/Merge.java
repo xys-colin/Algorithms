@@ -60,10 +60,10 @@ public class Merge {
         }
         //归并回到a[lo...hi]
         for (int k = i; k <= hi; k++) {
-            if (i > mid) a[k] = aux[j++];
-            else if (j > hi) a[k] = aux[i++];
-            else if (Example.less(aux[i], aux[j])) a[k] = aux[i++];
-            else a[k] = aux[j++];
+            if (i > mid) a[k] = aux[j++];//左半边用尽
+            else if (j > hi) a[k] = aux[i++];//右半边用尽
+            else if (Example.less(aux[i], aux[j])) a[k] = aux[i++];//左半边的当前元素小于右半边的当前元素
+            else a[k] = aux[j++];//左半边的当前元素大于右半边的当前元素
         }
     }
 }
