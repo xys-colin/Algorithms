@@ -16,11 +16,12 @@ public class Insertion {
         int N =a.length;
         for (int i = 1; i < N; i++) {
             Comparable tmp=a[i];
-            while (i>0&&Example.less(tmp,a[i-1])){
-               a[i]=a[i-1];
-               i--;
+            int j=i;
+            while (j>0&&Example.less(tmp,a[j-1])){
+               a[j]=a[j-1];
+               j--;
             }
-           a[i]=tmp;
+           a[j]=tmp;
         }
     }
 }
