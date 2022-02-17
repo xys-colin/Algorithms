@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 
 /**
- * @description:
+ * @description: 二分查找（基于有序数组）
  * @author: muLin
  * @time: 2021/9/15 17:46
  */
