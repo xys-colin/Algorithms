@@ -31,7 +31,7 @@ public class KMP {
     public int search(String txt){
         //在txt上模拟dfa运行
         int i,j,n=txt.length(),m=pat.length();
-        for (i = 0,j=1; j<m&&i < n; i++) {
+        for (i = 0,j=0; j<m&&i < n; i++) {
             j=dfa[txt.charAt(i)][j];
         }
         if (j==m) return i-m;
