@@ -1,4 +1,4 @@
-package cn.qmulin.graph;
+package cn.qmulin.graph.base;
 
 import cn.qmulin.base.Bag;
 

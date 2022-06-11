@@ -20,21 +20,22 @@ public class KMP {
             //计算dfa[][j]
             for (int c = 0; c < 256; c++) {
                 //复制匹配失败情况下的值
-                dfa[c][j]=dfa[c][x];
+                dfa[c][j] = dfa[c][x];
             }
             //设置匹配成功情况下的值
-            dfa[pat.charAt(j)][j]=j+1;
+            dfa[pat.charAt(j)][j] = j + 1;
             //更新重启状态
-            x=dfa[pat.charAt(j)][x];
+            x = dfa[pat.charAt(j)][x];
         }
     }
-    public int search(String txt){
+
+    public int search(String txt) {
         //在txt上模拟dfa运行
-        int i,j,n=txt.length(),m=pat.length();
-        for (i = 0,j=0; j<m&&i < n; i++) {
-            j=dfa[txt.charAt(i)][j];
+        int i, j, n = txt.length(), m = pat.length();
+        for (i = 0, j = 0; j < m && i < n; i++) {
+            j = dfa[txt.charAt(i)][j];
         }
-        if (j==m) return i-m;
+        if (j == m) return i - m;
         return -1;
     }
 }

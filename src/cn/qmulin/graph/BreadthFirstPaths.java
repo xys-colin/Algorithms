@@ -2,6 +2,7 @@ package cn.qmulin.graph;
 
 import cn.qmulin.base.Queue;
 import cn.qmulin.base.Stack;
+import cn.qmulin.graph.base.Graph;
 
 /**
  * @description: 使用广度优先搜索查找图中的路径
