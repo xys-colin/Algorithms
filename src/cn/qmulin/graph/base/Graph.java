@@ -52,23 +52,19 @@ public class Graph {
      * @param v
      * @return
      */
-    public Iterable<Integer> adj(int v) {
+    public Bag<Integer> adj(int v) {
         return adj[v];
     }
 
     /**
-     * 计算顶点v的度数
+     * 计算顶点v的出度数
      *
      * @param graph
      * @param v
      * @return
      */
-    public static int degree(Graph graph, int v) {
-        int degree = 0;
-        for (int w : graph.adj(v)) {
-            degree++;
-        }
-        return degree;
+    public int degree(Graph graph, int v) {
+        return graph.adj(v).size();
     }
 
     /**
@@ -77,7 +73,7 @@ public class Graph {
      * @param graph
      * @return
      */
-    public static int maxDegree(Graph graph) {
+    public int maxDegree(Graph graph) {
         int max = 0;
         for (int i = 0; i < graph.V(); i++) {
             int degree = degree(graph, i);
