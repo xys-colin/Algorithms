@@ -1,9 +1,11 @@
 package cn.qmulin.graph;
 
+import cn.qmulin.base.IndexMinPQ;
 import cn.qmulin.base.Queue;
 import cn.qmulin.graph.base.Edge;
 import cn.qmulin.graph.base.EdgeWeightedGraph;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.TreeMap;
 
@@ -21,7 +23,7 @@ public class PrimMST {
     //如果v在树中则为true;
     private boolean[] marked;
     //有效地横切边
-    private TreeMap<Integer, Double> pq;
+    private IndexMinPQ<Double> pq;
 
     public PrimMST(EdgeWeightedGraph graph) {
         edgeTo = new Edge[graph.getV()];
@@ -31,16 +33,15 @@ public class PrimMST {
             //初始化顶点到每个顶点距离为无穷大(除自身)
             distTo[i] = Double.POSITIVE_INFINITY;
         }
-        pq = new TreeMap<>();
+        pq = new IndexMinPQ<>(graph.getV());
         distTo[0] = 0.0;
-        pq.put(0, 0.0);
+        pq.insert(0, 0.0);
         while (!pq.isEmpty()) {
-            visit(graph, pq.firstKey());
+            visit(graph, pq.delMin());
         }
     }
 
     private void visit(EdgeWeightedGraph graph, int v) {
-        pq.remove(v);
         marked[v] = true;
         for (Edge edge : graph.adj(v)) {
             int w = edge.other(v);
@@ -48,8 +49,8 @@ public class PrimMST {
             if (edge.getWeight() < distTo[w]) {
                 edgeTo[w] = edge;
                 distTo[w] = edge.getWeight();
-                if (pq.containsKey(w)) pq.put(w, distTo[w]);
-                else pq.put(w, distTo[w]);
+                if (pq.contains(w)) pq.changeKey(w, distTo[w]);
+                else pq.insert(w, distTo[w]);
             }
         }
     }

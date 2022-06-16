@@ -1,31 +1,29 @@
-package cn.qmulin.sort;
+package cn.qmulin.base;
 
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * @description: 基于堆的最小优先队列
- * @author: xys
- * @date: 2022/6/16 15:49
+ * @description: 基于堆的最大优先队列
+ * @author: muLin
+ * @time: 2020/12/14 20:26
  */
-public class MinPQ<Key> implements Iterable<Key> {
-    private Key[] pq;                    // store items at indices 1 to n
-    private int n;                       // number of items on priority queue
-    private Comparator<Key> comparator;  // optional comparator
+public class MaxPQ<Key> implements Iterable<Key> {
+    private Key[] pq;
+    private int n = 0;
+    private Comparator<Key> comparator;
 
-    public MinPQ(int initCapacity) {
-        pq = (Key[]) new Object[initCapacity + 1];
-        n = 0;
+    public MaxPQ(int maxN) {
+        pq = (Key[]) new Object[maxN + 1];
     }
 
-    public MinPQ(int initCapacity, Comparator<Key> comparator) {
+    public MaxPQ(int initCapacity, Comparator<Key> comparator) {
         this.comparator = comparator;
         pq = (Key[]) new Object[initCapacity + 1];
-        n = 0;
     }
 
-    public MinPQ(Key[] keys) {
+    public MaxPQ(Key[] keys) {
         n = keys.length;
         pq = (Key[]) new Object[keys.length + 1];
         for (int i = 0; i < n; i++)
@@ -42,8 +40,7 @@ public class MinPQ<Key> implements Iterable<Key> {
         return n;
     }
 
-    public Key min() {
-        if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
+    public Key max() {
         return pq[1];
     }
 
@@ -59,24 +56,36 @@ public class MinPQ<Key> implements Iterable<Key> {
     public void insert(Key x) {
         // double size of array if necessary
         if (n == pq.length - 1) resize(2 * pq.length);
-
         // add x, and percolate it up to maintain heap invariant
         pq[++n] = x;
         swim(n);
     }
 
-    public Key delMin() {
-        if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
-        Key min = pq[1];
-        exch(1, n--);
-        sink(1);
-        pq[n + 1] = null;     // to avoid loitering and help with garbage collection
-        if ((n > 0) && (n == (pq.length - 1) / 4)) resize(pq.length / 2);
-        return min;
+    public Key delMax() {
+        Key max = pq[1];//从根节点得到最大元素
+        exch(1, n--);//将其和最后一个结点交换
+        pq[n + 1] = null;//防止对象游离
+        sink(1);//恢复堆的有序性
+        return max;
+    }
+
+    private void exch(int i, int j) {
+        Key t = pq[i];
+        pq[i] = pq[j];
+        pq[j] = t;
+    }
+
+    private boolean less(int i, int j) {
+        if (comparator == null) {
+            return ((Comparable<Key>) pq[i]).compareTo(pq[j]) < 0;
+        }
+        else {
+            return comparator.compare(pq[i], pq[j]) < 0;
+        }
     }
 
     private void swim(int k) {
-        while (k > 1 && greater(k / 2, k)) {
+        while (k > 1 && less(k / 2, k)) {
             exch(k / 2, k);
             k = k / 2;
         }
@@ -85,39 +94,28 @@ public class MinPQ<Key> implements Iterable<Key> {
     private void sink(int k) {
         while (2 * k <= n) {
             int j = 2 * k;
-            if (j < n && greater(j, j + 1)) j++;
-            if (!greater(k, j)) break;
+            if (j < n && less(j, j + 1)) j++;
+            if (!less(k, j)) break;
             exch(k, j);
             k = j;
         }
     }
-    private boolean greater(int i, int j) {
-        if (comparator == null) {
-            return ((Comparable<Key>) pq[i]).compareTo(pq[j]) > 0;
-        } else {
-            return comparator.compare(pq[i], pq[j]) > 0;
-        }
-    }
 
-    private void exch(int i, int j) {
-        Key swap = pq[i];
-        pq[i] = pq[j];
-        pq[j] = swap;
-    }
-    @Override
+
     public Iterator<Key> iterator() {
         return new HeapIterator();
     }
 
     private class HeapIterator implements Iterator<Key> {
+
         // create a new pq
-        private MinPQ<Key> copy;
+        private MaxPQ<Key> copy;
 
         // add all items to copy of heap
         // takes linear time since already in heap order so no keys move
         public HeapIterator() {
-            if (comparator == null) copy = new MinPQ<Key>(size());
-            else                    copy = new MinPQ<Key>(size(), comparator);
+            if (comparator == null) copy = new MaxPQ<Key>(size());
+            else                    copy = new MaxPQ<Key>(size(), comparator);
             for (int i = 1; i <= n; i++)
                 copy.insert(pq[i]);
         }
@@ -127,7 +125,7 @@ public class MinPQ<Key> implements Iterable<Key> {
 
         public Key next() {
             if (!hasNext()) throw new NoSuchElementException();
-            return copy.delMin();
+            return copy.delMax();
         }
     }
 }

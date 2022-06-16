@@ -3,7 +3,7 @@ package cn.qmulin.graph;
 import cn.qmulin.base.Queue;
 import cn.qmulin.graph.base.Edge;
 import cn.qmulin.graph.base.EdgeWeightedGraph;
-import cn.qmulin.sort.MinPQ;
+import cn.qmulin.base.MinPQ;
 
 /**
  * @description: 最小生成树的Kruskal算法
