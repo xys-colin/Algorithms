@@ -9,6 +9,7 @@ import java.util.TreeMap;
 
 /**
  * @description: 最小生成树的Prim算法(即时版本)
+ * 与延时版本不同是从优先队列中删除了失效的边,只含有树顶点和非树顶点之间的横切边
  * @author: xys
  * @date: 2022/6/15 17:42
  */
