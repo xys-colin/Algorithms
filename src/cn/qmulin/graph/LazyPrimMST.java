@@ -20,7 +20,7 @@ public class LazyPrimMST {
     //横切边(包括失效的边)
     private PriorityQueue<Edge> pq;
     //最小生成树的总权重
-    private int weight;
+    private double weight;
 
     public LazyPrimMST(EdgeWeightedGraph graph) {
         pq = new PriorityQueue<>();
