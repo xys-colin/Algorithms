@@ -11,19 +11,15 @@ import java.util.NoSuchElementException;
 
 
 public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer> {
-    private int maxN;        // maximum number of elements on PQ
-    private int n;           // number of elements on PQ
-    private int[] pq;        // binary heap using 1-based indexing
+    private int maxN;        // 队列的最大元素数量
+    private int n;           // 队列当前元素数量
+    private int[] pq;        // 使用基于1的索引的二叉树堆,存放所有
     private int[] qp;        // inverse of pq - qp[pq[i]] = pq[qp[i]] = i
-    private Key[] keys;      // keys[i] = priority of i
+    private Key[] keys;      // keys[i] = i的优先级,存放值
 
     /**
-     * Initializes an empty indexed priority queue with indices between {@code 0}
-     * and {@code maxN - 1}.
-     *
-     * @param maxN the keys on this priority queue are index from {@code 0}
-     *             {@code maxN - 1}
-     * @throws IllegalArgumentException if {@code maxN < 0}
+     * 初始化队列的长度
+     * @param maxN 最大长度
      */
     public IndexMinPQ(int maxN) {
         if (maxN < 0) throw new IllegalArgumentException();
