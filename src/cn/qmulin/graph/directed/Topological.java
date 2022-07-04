@@ -1,6 +1,7 @@
-package cn.qmulin.graph;
+package cn.qmulin.graph.directed;
 
 import cn.qmulin.graph.base.Digraph;
+import cn.qmulin.graph.base.EdgeWeightedDigraph;
 import cn.qmulin.graph.base.SymbolDigraph;
 
 /**
@@ -17,6 +18,14 @@ public class Topological {
         DirectedCycle cycleFinder = new DirectedCycle(g);
         if (!cycleFinder.hasCycle()) {
             DepthFirstOrder dfs = new DepthFirstOrder(g);
+            order = dfs.reversePost();
+        }
+    }
+
+    public Topological(EdgeWeightedDigraph G) {
+        EdgeWeightedDirectedCycle finder = new EdgeWeightedDirectedCycle(G);
+        if (!finder.hasCycle()) {
+            DepthFirstOrder dfs = new DepthFirstOrder(G);
             order = dfs.reversePost();
         }
     }

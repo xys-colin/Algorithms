@@ -1,6 +1,7 @@
-package cn.qmulin.graph;
+package cn.qmulin.graph.directed;
 
 import cn.qmulin.graph.base.Digraph;
+import cn.qmulin.graph.directed.DepthFirstOrder;
 
 /**
  * @description: 计算强连通分量的Kosaraju算法

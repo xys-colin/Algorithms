@@ -1,4 +1,4 @@
-package cn.qmulin.graph;
+package cn.qmulin.graph.directed;
 
 import cn.qmulin.graph.base.Digraph;
 

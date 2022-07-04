@@ -1,4 +1,4 @@
-package cn.qmulin.graph;
+package cn.qmulin.graph.undirected;
 
 import cn.qmulin.base.Stack;
 import cn.qmulin.graph.base.Graph;

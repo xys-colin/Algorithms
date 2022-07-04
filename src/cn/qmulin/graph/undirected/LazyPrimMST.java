@@ -1,6 +1,5 @@
-package cn.qmulin.graph;
+package cn.qmulin.graph.undirected;
 
-import cn.qmulin.base.In;
 import cn.qmulin.base.Queue;
 import cn.qmulin.graph.base.Edge;
 import cn.qmulin.graph.base.EdgeWeightedGraph;

@@ -1,9 +1,7 @@
-package cn.qmulin.graph;
+package cn.qmulin.graph.directed;
 
 import cn.qmulin.graph.base.DirectedEdge;
-import cn.qmulin.graph.base.DirectedEdge;
 import cn.qmulin.graph.base.EdgeWeightedDigraph;
-import cn.qmulin.graph.base.EdgeWeightedGraph;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

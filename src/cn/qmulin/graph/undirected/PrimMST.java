@@ -1,13 +1,9 @@
-package cn.qmulin.graph;
+package cn.qmulin.graph.undirected;
 
 import cn.qmulin.base.IndexMinPQ;
 import cn.qmulin.base.Queue;
 import cn.qmulin.graph.base.Edge;
 import cn.qmulin.graph.base.EdgeWeightedGraph;
-
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.TreeMap;
 
 /**
  * @description: 最小生成树的Prim算法(即时版本)

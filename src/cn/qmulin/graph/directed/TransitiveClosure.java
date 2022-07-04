@@ -1,6 +1,7 @@
-package cn.qmulin.graph;
+package cn.qmulin.graph.directed;
 
 import cn.qmulin.graph.base.Digraph;
+import cn.qmulin.graph.directed.DirectedDFS;
 
 /**
  * @description: 顶点对的可达性, 是否存在一条给定顶点v到顶点w的路径
