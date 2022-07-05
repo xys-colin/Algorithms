@@ -14,10 +14,6 @@ import cn.qmulin.graph.base.Graph;
  */
 public class DepthFirstOrder {
     private boolean[] marked;
-    // pre[v]= v的前序节点数
-    private int[] pre;
-    //post[v]=v的后序节点数
-    private int[] post;
     //所有顶点的前序排列 (在递归调用之前将顶点加入队列中)
     private Queue<Integer> preorder;
     //所有顶点的后序排列 (在递归调用之后将顶点加入队列中)
@@ -40,11 +36,10 @@ public class DepthFirstOrder {
     }
 
     public DepthFirstOrder(EdgeWeightedDigraph G) {
-        pre    = new int[G.getV()];
-        post   = new int[G.getV()];
         postorder = new Queue<Integer>();
-        preorder  = new Queue<Integer>();
-        marked    = new boolean[G.getV()];
+        preorder = new Queue<Integer>();
+        reversePost = new Stack<>();
+        marked = new boolean[G.getV()];
         for (int v = 0; v < G.getV(); v++)
             if (!marked[v]) dfs(G, v);
     }
@@ -62,7 +57,6 @@ public class DepthFirstOrder {
 
     private void dfs(EdgeWeightedDigraph G, int v) {
         marked[v] = true;
-        pre[v] = preCounter++;
         preorder.enqueue(v);
         for (DirectedEdge e : G.adj(v)) {
             int w = e.to();
@@ -71,7 +65,7 @@ public class DepthFirstOrder {
             }
         }
         postorder.enqueue(v);
-        post[v] = postCounter++;
+        reversePost.push(v);
     }
 
     public Iterable<Integer> preorder() {
