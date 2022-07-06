@@ -7,7 +7,7 @@ import cn.qmulin.graph.base.EdgeWeightedDigraph;
  * @description: 无环加权有向图的最长路径算法(与AcyclicSP相同)
  *  只是改变distTo[]初始值为最大负数, 并改变relax方法中的不等式的反向
  *  Tips:
- *      "关键路径"问题等价无环加权有向图中的最长路径问题
+ *      任务调度问题的"关键路径"方法等价无环加权有向图中的最长路径问题
  * @author: xys
  * @date: 2022/7/5 23:59
  */
